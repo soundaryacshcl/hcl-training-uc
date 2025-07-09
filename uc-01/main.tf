@@ -3,10 +3,11 @@ module "network" {
 }
 
 module "alb" {
-  source = "./modules/alb"
-  vpc_id = module.network.vpc_id
-  subnets = module.network.public_subnets
+  source  = "./modules/alb"
+  vpc_id  = module.network.vpc_id
+  subnets = module.network.public_subnet_ids
 }
+
 
 module "ec2" {
   source = "./modules/ec2"
