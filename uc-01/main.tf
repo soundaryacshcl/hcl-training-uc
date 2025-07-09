@@ -201,21 +201,17 @@ resource "aws_lb_target_group" "app3" {
 
 
 
-# Listener
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.alb.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "Default 404 Not Found"
-      status_code  = "404"
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app1.arn
   }
 }
+
 
 # Listener Rules (include exact and wildcard path match)
 resource "aws_lb_listener_rule" "app1_rule" {
