@@ -414,7 +414,7 @@ resource "aws_lb_target_group_attachment" "app3_target" {
 
 terraform {
   backend "s3" {
-    bucket = "hcl-training-uc-bucket"            # Your actual bucket name
+    bucket = "hcl-training-uc-01-bucket"            # Your actual bucket name
     key    = "uc-01/terraform.tfstate"         # Path to the state file inside the bucket
     region = "us-east-1"                     # Your region
   }
