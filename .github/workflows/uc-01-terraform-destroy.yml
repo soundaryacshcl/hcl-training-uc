@@ -1,4 +1,4 @@
-name: UC-01 Terraform Destory
+name: UC-01 Terraform Destory 
 
 on:
   workflow_dispatch:
