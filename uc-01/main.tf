@@ -410,5 +410,33 @@ resource "aws_lb_target_group_attachment" "app3_target" {
   port             = 80
 }
 
+resource "aws_s3_bucket" "tf_state" {
+  bucket = "my-terraform-state-bucket"  # Use a globally unique name
+
+  versioning {
+    enabled = true
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
+  tags = {
+    Name = "Terraform State Bucket"
+    Environment = "dev"
+  }
+}
+
+terraform {
+  backend "s3" {
+    bucket = "hcl-training-uc-bucket"            # Your actual bucket name
+    key    = "uc-01/terraform.tfstate"         # Path to the state file inside the bucket
+    region = "us-east-1"                     # Your region
+  }
+}
 
 
