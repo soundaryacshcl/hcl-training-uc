@@ -1,23 +1,26 @@
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "17.22.0"
+  version = "~> 20.33.0"
 
   cluster_name    = "my-eks-cluster"
-  cluster_version = "1.29"
-  subnet_ids      = module.vpc.private_subnets
-  vpc_id          = module.vpc.vpc_id
+  cluster_version = "1.31"
 
-  enable_irsa = true
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
 
-  eks_managed_node_groups = {
-    default = {
-      desired_capacity = 2
-      max_capacity     = 3
-      min_capacity     = 1
+  enable_cluster_creator_admin_permissions = true
+  cluster_endpoint_public_access           = true
 
-      instance_types = ["t3.medium"]
-    }
+  cluster_addons = {
+    coredns                 = {}
+    kube-proxy              = {}
+    vpc-cni                 = {}
+    eks-pod-identity-agent  = {}
+  }
+
+  cluster_compute_config = {
+    enabled    = true
+    node_pools = ["general-purpose"]
   }
 
   tags = {
