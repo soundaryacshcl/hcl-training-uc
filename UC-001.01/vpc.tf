@@ -12,15 +12,17 @@ module "vpc" {
   enable_nat_gateway  = true
   single_nat_gateway  = true
 
-  public_subnet_tags = {
-    for index, subnet in var.public_subnets :
-    "Name" => "public-subnet-${index + 1}"
-  }
+  public_subnet_tags_per_subnet = [
+    for index in range(length(var.public_subnets)) : {
+      Name = "public-subnet-${index + 1}"
+    }
+  ]
 
-  private_subnet_tags = {
-    for index, subnet in var.private_subnets :
-    "Name" => "private-subnet-${index + 1}"
-  }
+  private_subnet_tags_per_subnet = [
+    for index in range(length(var.private_subnets)) : {
+      Name = "private-subnet-${index + 1}"
+    }
+  ]
 
   tags = {
     Terraform   = "true"
