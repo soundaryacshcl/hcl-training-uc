@@ -10,6 +10,7 @@ module "sg" {
 module "ec2" {
   source          = "./modules/ec2"
   subnet_ids      = module.vpc.public_subnet_ids
+  ami_id          =  var.ami_id
   sg_id           = module.sg.web_sg_id
   instance_count  = 2
 }
