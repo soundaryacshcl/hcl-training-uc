@@ -21,10 +21,6 @@ module "ec2" {
   ami_id             = var.ami_id
   public_subnet_ids  = module.vpc.public_subnet_ids
   web_sg_id          = module.security_groups.web_sg_id
-  rds_endpoint       = module.rds.rds_endpoint
-  db_user            = var.db_user
-  db_password        = var.db_password
-  db_name            = var.db_name
 }
 
 module "rds" {
