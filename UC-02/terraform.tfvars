@@ -1,1 +1,1 @@
-db_password     = "${{ secrets.RDS_PASSWORD }}"
+db_password = "${{ secrets.RDS_PASSWORD }}"
