@@ -3,6 +3,8 @@ terraform {
     bucket       = "test-s3-bucket-uc-02"
     key          = "usecase2/terraform.tfstate"
     region       = "us-east-1"
-    use_lockfile = true
+    dynamodb_table = "terraform-lock"
+    encrypt        = true
+
   }
 }
