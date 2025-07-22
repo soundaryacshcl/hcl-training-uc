@@ -1,7 +1,3 @@
-variable "subnet_ids" {}
-variable "sg_id" {}
-variable "instance_count" {}
-
 resource "aws_instance" "web" {
   count         = var.instance_count
   ami           = var.ami_id
